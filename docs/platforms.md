@@ -117,16 +117,6 @@ Individual **netsim-tools** configuration modules are supported on these devices
 | FRR 7.5.0              | ✅ | ✅ | ✅ | ❌ |
 | Juniper vSRX 3.0       | ✅ | ✅ | ✅ | ❌ |
 
-## Supported Virtualization Providers
-
-Virtualization providers supported by **config-generate**:
-
-* [vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt), including support for *veryisolated* private networks (link type: **lan**) and P2P tunnels (link type: **p2p**).
-* [Vagrant VirtualBox provider](https://www.vagrantup.com/docs/providers/virtualbox)
-* [Containerlab](https://containerlab.srlinux.dev/) (added in release 0.5)
-
-Details of VirtualBox and Containerlab support are described below, for extensive vagrant-libvirt details please [refer to the installation guide](install.html#building-a-libvirt-based-lab).
-
 ### Vagrant with VirtualBox
 
 * Most networking vendors don't ship Vagrant boxes, and I had no interest in building VirtualBox boxes from scratch after setting up a *libvirt*-based lab on an Intel NUC. The only boxes I could get with zero hassle were Cisco Nexus 9300v and Arista vEOS, and they both work fine. If you want to add other devices, you'll have to modify *topology-defaults.yml* file.
