@@ -68,7 +68,7 @@ def setup_pools(addrs: typing.Optional[Box] = None, defaults: typing.Optional[Bo
     legacy['lan']['start'] = 1
   legacy.loopback = { 'ipv4': (defaults.get('loopback','10.0.0.%d') % 0) + '/24', 'prefix': 32 }
   legacy.p2p = { 'ipv4': defaults.get('p2p','10.2.0.0/16'), 'prefix': defaults.get('p2p_subnet',30) }
-  legacy.mgmt = {}
+  legacy.mgmt = Box({},default_box=True)
 
   if 'mgmt_ip' in defaults:
     legacy.mgmt.ipv4 = defaults.get('mgmt_ip') % 0
@@ -184,7 +184,7 @@ def get_pool(pools: Box, pool_list: typing.List[str]) -> typing.Optional[str]:
       return p
 
   common.error( \
-    'Cannot get addressing for any of these pools: ' % pool_list, \
+    'Cannot get addressing for any of these pools: %s' % str(pool_list), \
     category=common.MissingValue,module='addressing')
   return None
 

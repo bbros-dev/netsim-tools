@@ -25,7 +25,7 @@ def find_bgp_rr(bgp_as: int, topology: Box) -> typing.List[Box]:
 
 def bgp_neighbor(n: Box, intf: Box, ctype: str, extra_data: typing.Optional[Box] = None) -> Box:
   if not extra_data:
-    extra_data = Box[{}]
+    extra_data = {}
   ngb = Box(extra_data,default_box=True,box_dots=True)
   ngb.name = n.name
   ngb["as"] = n.bgp.get("as")

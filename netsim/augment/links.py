@@ -126,6 +126,10 @@ def augment_p2p_link(link: Box, addr_pools: Box, ndict: Box, defaults: typing.Op
     pfx_list = addressing.parse_prefix(link.prefix)
   else:
     pool = addressing.get_pool(addr_pools,[link.get('role'),'p2p','lan'])
+    if pool is None:
+      common.error("Cannot get addressing pool for P2P link: %s" % str(link))
+      return None
+
     pfx_list = addressing.get_pool_prefix(addr_pools,pool)
     link.prefix = { af: str(pfx_list[af]) for af in pfx_list }
     if pool and addr_pools[pool].get('unnumbered',None):

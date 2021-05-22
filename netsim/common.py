@@ -17,15 +17,18 @@ class MissingValue(Warning):
 class IncorrectValue(Warning):
   pass
 
-class FatalError(Exception):
+class FatalError(Warning):
   pass
 
-def fatal(text: str , module: str = 'topology') -> None:
+class ErrorAbort(Exception):
+  pass
+
+def fatal(text: str, module: str = 'topology') -> None:
   global err_count
   err_count = err_count + 1
   warnings.warn_explicit(text,FatalError,filename=module,lineno=err_count)
   if RAISE_ON_ERROR:
-    raise FatalError(text)
+    raise ErrorAbort(text)
   else:
     sys.exit(1)
 
