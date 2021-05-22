@@ -20,4 +20,5 @@ Optional topology elements include:
    nodes.md
    links.md
    addressing.md
+   modules.md
 ```

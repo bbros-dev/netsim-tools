@@ -105,7 +105,7 @@ The following interface parameters are configured on supported network operating
 
 ## Supported Configuration Modules
 
-Individual **netsim-tools** configuration modules are supported on these devices:
+Individual **netsim-tools** [configuration modules](module-reference.md) are supported on these devices:
 
 | Operating system | OSPF | IS-IS | BGP | SR-MPLS |
 |------------------------|:-:|:-:|:-:|:-:|
@@ -116,14 +116,3 @@ Individual **netsim-tools** configuration modules are supported on these devices
 | Cumulus Linux          | ✅ | ❌ | ✅ |  ❌ |
 | FRR 7.5.0              | ✅ | ✅ | ✅ | ❌ |
 | Juniper vSRX 3.0       | ✅ | ✅ | ✅ | ❌ |
-
-### Vagrant with VirtualBox
-
-* Most networking vendors don't ship Vagrant boxes, and I had no interest in building VirtualBox boxes from scratch after setting up a *libvirt*-based lab on an Intel NUC. The only boxes I could get with zero hassle were Cisco Nexus 9300v and Arista vEOS, and they both work fine. If you want to add other devices, you'll have to modify *topology-defaults.yml* file.
-* The latest version of Arista vEOS available as Vagrant box for VirtualBox is 4.21.14M.
-* Vagrantfile created by **create-topology** sets up port forwarding for SSH (22), HTTP (80) and NETCONF (830), but the corresponding Ansible inventory contains only **ansible_port** (SSH). You could edit the final inventory by hand, add extra file to `host_vars`, or fix my code. Should you decide to do the latter, please contact me in advance to discuss the necessary data structures.
-
-### Containerlab
-
-* The only devices currently supported are Arista cEOS and FRR
-* Feel free to extend the templates and defaults to support other network devices
