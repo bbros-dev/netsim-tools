@@ -107,7 +107,7 @@ For more information, see [list of configuration modules](module-reference.md)
 
 Module parameters are always a dictionary of values stored under the *module-name* key in defaults, topology, node or link. Link module parameters are not changed during the topology expansion, node module parameters are adjusted based on topology parameters and defaults:
 
-* Global and topology defaults are merged with the **defaults** setting in topology file (see [*topology defaults*](create-topology.md#defaults) and *[merging defaults](addressing.md#merging-defaults)*)
+* Global and topology defaults are merged with the **defaults** setting in topology file (see [*topology defaults*](defaults.md) and *[merging defaults](addressing.md#merging-defaults)*)
 * For every module used in network topology, the default module parameters are merged with topology-level settings.
 * For every node, the topology-level settings for modules used by that node are merged with the node-level settings.
 * Final node-level settings are saved into expanded topology file or Ansible inventory, and used by configuration templates.

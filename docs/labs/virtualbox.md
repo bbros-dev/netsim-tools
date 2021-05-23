@@ -4,9 +4,27 @@ Virtualbox-based Vagrant lab is extremely easy to set up on Windows, MacOS, or L
 
 * Install Virtualbox (might require fiddling with BIOS setup on Ubuntu bare-metal installations)
 * Install Vagrant
-* Create [lab topology file](../create-topology.md). Use `provider: virtualbox` in lab topology to select the *virtualbox* virtualization provider.
+* Create [lab topology file](../topology-overview.md). Use `provider: virtualbox` in lab topology to select the *virtualbox* virtualization provider.
 * Use **create-topology** script to create *Vagrantfile*
 * Execute **vagrant up**
+
+## Testing the Installation
+
+* Create an empty directory and `topology.yml` file with the following contents within that directory:
+
+```
+---
+defaults:
+  device: cumulus
+
+nodes: [ s1, s2, s3 ]
+links: [ s1-s2, s2-s3, s1-s2-s3 ]
+```
+
+* Create Vagrantfile with `create-topology -t topology.yml -p`
+* Execute `vagrant up` to spin up three Cumulus VX virtual machines
+* Connect to the Cumulus VX devices with `vagrant ssh`
+* Destroy the lab with `vagrant destroy -f`
 
 ## Creating Vagrant Boxes
 

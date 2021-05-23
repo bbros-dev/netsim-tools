@@ -2,9 +2,9 @@
 
 Links between virtual lab devices are specified in **links** element of the topology file -- a list of links in one of these formats:
 
-* A dictionary of node names and other link attributes
-* A list of node names
-* A string in format *a-b*
+* A dictionary of node names and other link attributes. Use this format when you want to have a tight control over interface attributes like IP addresses, or when you have to specify additional link attributes like OSPF cost.
+* A list of node names. Use this format for multi-access interface when you're OK with default IP addressing and don't need to specify any additional link attributes.
+* A string in *node*-*node* format. Use this format for a point-to-point link.
 
 You can use all three link formats in the same topology file -- they are always converted into a dictionary format first, and then augmented with addressing details.
 
@@ -185,7 +185,7 @@ Point-to-point links between network devices are implemented with P2P tunnels (a
 
 Multi-access and stub links are implemented with custom networks (as supported by the underlying virtualization environment). The **bridge** attribute allows you to specify the custom network name; its default value is *name_N* where:
 
-* *name* is the [topology name](create-topology.md#topology-format) or current directory name;
+* *name* is the [topology name](topology-overview.md) or current directory name;
 * *N* is the link ID (position of link object in **links** list) starting with 1.
 
 ## Augmenting Link Data

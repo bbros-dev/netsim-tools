@@ -60,6 +60,24 @@ You could also use **virsh net-edit _vagrant-libvirt_** to edit the XML definiti
 
 For more details, see [Using Libvirt Provider with Vagrant](https://codingpackets.com/blog/using-the-libvirt-provider-with-vagrant/) by [Brad Searle](https://www.linkedin.com/in/bradleysearle/). 
 
+## Testing the Installation
+
+* Create an empty directory and `topology.yml` file with the following contents within that directory:
+
+```
+---
+defaults:
+  device: cumulus
+
+nodes: [ s1, s2, s3 ]
+links: [ s1-s2, s2-s3, s1-s2-s3 ]
+```
+
+* Create Vagrantfile with `create-topology -t topology.yml -p`
+* Execute `vagrant up` to spin up three Cumulus VX virtual machines
+* Connect to the Cumulus VX devices with `vagrant ssh`
+* Destroy the lab with `vagrant destroy -f`
+
 ## Creating Vagrant Boxes
 
 Vagrant relies on *boxes* (prepackaged VM images), and while it's possible to download some network device images from Vagrant Cloud, you'll have to build most of the boxes you'd want to use in your lab.

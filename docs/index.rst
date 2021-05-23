@@ -54,6 +54,8 @@ Getting Started
    :maxdepth: 2
    :hidden:
 
+   tutorials.md
+   topology-overview.md
    tool-overview.md
    create-topology.md
    configs.md
@@ -67,6 +69,7 @@ Getting Started
    topology-reference.md
    modules.md
    module-reference.md
+   defaults.md
 ..
 
 .. toctree::
