@@ -27,10 +27,21 @@ author = 'Ivan Pepelnjak'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
+#  'recommonmark',
 # ones.
 extensions = [
-  'recommonmark',
+  'myst_parser',
   'sphinx_markdown_tables'
+]
+
+myst_heading_anchors = 3
+
+myst_enable_extensions = [
+    "deflist",
+    "html_admonition",
+    "replacements",
+    "smartquotes",
+    "tasklist"
 ]
 
 # Add any paths that contain templates here, relative to this directory.

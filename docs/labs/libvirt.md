@@ -58,7 +58,7 @@ You could also use **virsh net-edit _vagrant-libvirt_** to edit the XML definiti
 </ip>
 ```
 
-For more details, see [Using Libvirt Provider with Vagrant](https://codingpackets.com/blog/using-the-libvirt-provider-with-vagrant/) and [Creating vagrant-libvirt Network](#creating-vagrant-libvirt-network) blog posts by [Brad Searle](https://www.linkedin.com/in/bradleysearle/). 
+For more details, see [Using Libvirt Provider with Vagrant](https://codingpackets.com/blog/using-the-libvirt-provider-with-vagrant/) by [Brad Searle](https://www.linkedin.com/in/bradleysearle/). 
 
 ## Creating Vagrant Boxes
 

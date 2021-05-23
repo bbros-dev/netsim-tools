@@ -8,9 +8,10 @@ Installing the tools:
 * Optional: install Ansible or use [ipSpace network automation container image](https://hub.docker.com/r/ipspace/automation). The tools were tested with Ansible 2.9 and 2.10.
 * Add **netsim-tools** directory to your PATH
 
+## Building the Lab Environment
+
 ```eval_rst
 .. toctree::
-   :caption: Building the Lab Environment
    :maxdepth: 1
 
    labs/libvirt.md
