@@ -17,7 +17,7 @@ from ..augment.nodes import rebuild_nodes_map
 #
 no_propagate_list = ["attributes","requires","supported_on","no_propagate"]
 
-class Module(Callback):
+class _Module(Callback):
 
   def __init__(self, data: Box) -> None:
     pass
@@ -29,7 +29,7 @@ class Module(Callback):
     if obj:
       return obj(data)
     else:
-      return Module(data)
+      return _Module(data)
 
 """
 pre_transform: executed just before the main data model transformation is started
@@ -274,7 +274,7 @@ def module_transform(method: str, topology: Box) -> None:
 
   for m in topology.get('module',[]):
     if not mod_load.get(m):
-      mod_load[m] = Module.load(m,topology.get(m))
+      mod_load[m] = _Module.load(m,topology.get(m))
     mod_load[m].call("module_"+method,topology)
 
 def node_transform(method: str , topology: Box) -> None:
