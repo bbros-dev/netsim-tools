@@ -11,8 +11,8 @@ from box import Box
 from .. import common
 from .. import addressing
 
-link_attr_base = [ 'bridge','type','linkindex','role','name' ]
-link_attr_full = [ 'prefix','bandwidth' ]
+link_attr_base = [ 'bridge','type','linkindex','role','name','bandwidth' ] # Attributes that are copied from links to interfaces
+link_attr_full = [ 'prefix' ]                                              # Extra link attributes that are not copied
 
 def adjust_link_list(links: typing.Optional[typing.List[typing.Any]]) -> typing.Optional[typing.List[typing.Dict]]:
   link_list = []
@@ -28,9 +28,7 @@ def adjust_link_list(links: typing.Optional[typing.List[typing.Any]]) -> typing.
       link_list.append({ key: None for key in l.split('-') })
   return link_list
 
-def add_node_interface(node: Box, ifdata: Box, defaults: typing.Optional[Box] = None) -> int:
-  if not defaults:
-    defaults = Box({})
+def add_node_interface(node: Box, ifdata: Box, defaults: Box) -> int:
   node.setdefault('links',[])
   ifindex_offset = defaults.devices[node.device].get('ifindex_offset',1)
   ifindex = len(node.links) + ifindex_offset
@@ -49,11 +47,7 @@ def add_node_interface(node: Box, ifdata: Box, defaults: typing.Optional[Box] = 
 
 # Add common interface data to node ifaddr structure
 #
-def interface_data(link: Box, link_attr: typing.Optional[typing.List[str]] = None, ifdata: typing.Optional[Box] = None) -> Box:
-  if not link_attr:
-    link_attr = []
-  if not ifdata:
-    ifdata = Box[{}]
+def interface_data(link: Box, link_attr: typing.List[str], ifdata: Box) -> Box:
   for k in link_attr:
     if k in link:
       ifdata[k] = link[k]
