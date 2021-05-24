@@ -1,5 +1,5 @@
 #
-# IS-IS transformation module
+# OSPF transformation module
 #
 
 from . import _Module
