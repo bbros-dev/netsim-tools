@@ -1,4 +1,5 @@
 bgp:
+  advertise_loopback: true
   as: 65000
   next_hop_self: true
 input:
@@ -26,6 +27,7 @@ nodes:
     id: 17
     process: 1
 - bgp:
+    advertise_loopback: true
     as: 65000
     neighbors: []
     next_hop_self: true

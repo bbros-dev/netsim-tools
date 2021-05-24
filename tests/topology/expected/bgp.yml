@@ -1,4 +1,5 @@
 bgp:
+  advertise_loopback: true
   as: 65000
   next_hop_self: true
 input:
@@ -169,6 +170,7 @@ module:
 name: input
 nodes:
 - bgp:
+    advertise_loopback: true
     as: 65000
     neighbors:
     - as: 65000
@@ -233,6 +235,7 @@ nodes:
   - ospf
   name: rr1
 - bgp:
+    advertise_loopback: true
     as: 65000
     neighbors:
     - as: 65000
@@ -297,6 +300,7 @@ nodes:
   - ospf
   name: rr2
 - bgp:
+    advertise_loopback: true
     as: 65000
     neighbors:
     - as: 65000
@@ -375,6 +379,7 @@ nodes:
   ospf:
     unnumbered: true
 - bgp:
+    advertise_loopback: true
     as: 65000
     neighbors:
     - as: 65000
@@ -451,6 +456,7 @@ nodes:
   - ospf
   name: pe2
 - bgp:
+    advertise_loopback: true
     as: 65001
     neighbors:
     - as: 65000
@@ -498,6 +504,7 @@ nodes:
   ospf:
     unnumbered: true
 - bgp:
+    advertise_loopback: true
     as: 65002
     neighbors:
     - as: 65000

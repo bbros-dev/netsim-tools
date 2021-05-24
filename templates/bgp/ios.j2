@@ -9,12 +9,15 @@ router bgp {{ bgp.as }}
 {% endfor %}
  address-family ipv4
 !
-{% if loopback.ipv4 is defined %}
+{% if loopback.ipv4 is defined and bgp.advertise_loopback %}
   network {{ loopback.ipv4|ipaddr('network') }} mask {{ loopback.ipv4|ipaddr('netmask') }}
 {% endif %}
 !
 {% for l in links|default([]) if l.bgp.advertise|default("") and l.ipv4 is defined %}
   network {{ l.ipv4|ipaddr('network') }} mask {{ l.ipv4|ipaddr('netmask') }}
+{% endfor %}
+{% for pfx in bgp.originate|default([]) %}
+  network {{ pfx|ipaddr('network') }} mask {{ pfx|ipaddr('netmask') }}
 {% endfor %}
 !
 {% for n in bgp.neighbors if n.ipv4 is defined %}
@@ -27,4 +30,8 @@ router bgp {{ bgp.as }}
   neighbor {{ n.ipv4 }} route-reflector-client
 {%     endif %}
 {%   endif %}
+{% endfor %}
+!
+{% for pfx in bgp.originate|default([]) %}
+ip route {{ pfx|ipaddr('network') }} {{ pfx|ipaddr('netmask') }} null 0
 {% endfor %}

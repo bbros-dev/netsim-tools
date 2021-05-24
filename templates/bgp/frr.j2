@@ -13,7 +13,7 @@ router bgp {{ bgp.as }}
 {% endfor %}
  address-family ipv4 unicast
 !
-{% if loopback.ipv4 is defined %}
+{% if loopback.ipv4 is defined and bgp.advertise_loopback %}
   network {{ loopback.ipv4 }}
 {% endif %}
 !

@@ -10,6 +10,7 @@ Supported features:
 * BGP route reflectors
 * Next-hop-self control on IBGP sessions
 * Configurable link prefix advertisement
+* Additional (dummy) prefix advertisement
 * Interaction with OSPF or IS-IS (IGP is disabled on external links)
 
 You could use *global* or *per-node* parameters to configure BGP autonomous systems and route reflectors (you expected tons of nerd knobs in a BGP implementation, didn't you?):
@@ -54,6 +55,7 @@ Advanced global configuration parameters include:
 
 * **advertise_roles** -- list of link types and roles. Links matching any element of the list will be advertised into BGP. See *[Advertised BGP Prefixes](#advertised-bgp-prefixes)* for details.
 * **ebgp_role** -- link role set on links connecting nodes from different autonomous systems. See *[Interaction with IGP](#interaction-with-igp)* for details.
+* **advertise_loopback** -- when set to `True` (default), the loopback IP address is advertised as a BGP prefix. Set it to `False` in global defaults or as a node setting to disable loopback prefix advertisements.
 
 ## Node Configuration Parameters
 
@@ -64,6 +66,11 @@ Instead of using a global list of autonomous systems, you could specify a BGP au
 * **bgp.next_hop_self** -- use *next-hop-self* on IBGP sessions. This parameter can also be specified as a global value; system default is **true**.
 
 Specifying a BGP autonomous system on individual nodes makes sense when each node uses a different BGP AS. See [EBGP leaf-and-spine fabric example](bgp_example/ebgp.md) for details.
+
+Additional per-node BGP configuration parameters include:
+
+* **bgp.advertise_loopback** -- when set to `False`, the loopback IP prefix is not advertised in BGP. See also [*Advanced Global Configuration Parameters*](#advanced-global-configuration-parameters).
+* **originate** -- a list of additional prefixes to advertise. The advertised prefixes are supported with a static route pointing to *Null0*.
 
 **Notes:**
 * **bgp.as** parameter *must* be specified for every node using BGP configuration module.
@@ -82,11 +89,13 @@ See [examples](#examples) for sample usage guidelines.
 
 The following IP prefixes are configured with **network** statements within the BGP routing process:
 
-* Loopback interface IPv4 prefix (usually a /32)
+* Loopback interface IPv4 prefix (usually a /32) unless the **bgp.advertise_loopback** is set to `False`.
 * IPv4 prefixes from links with **bgp.advertise** parameter set to **true**.
 * Prefixes assigned to *stub* networks -- links with a single node attached to them or links with **role** set to **stub**. To prevent a stub prefix from being advertised, set **bgp.advertise** link parameter to **false**
+* Prefixes in **bgp.originate** list. Static routes to *Null0* are created for those prefixes if needed.
 
-**Notes:**
+### Using bgp.advertise Link Attribute
+
 * If you set **bgp.advertise** parameter on a link, all nodes connected to the link advertise the link prefix. In the following example, the link prefix is advertised by PE1 and PE2.
 
 ```
