@@ -107,12 +107,35 @@ The following interface parameters are configured on supported network operating
 
 Individual **netsim-tools** [configuration modules](module-reference.md) are supported on these devices:
 
-| Operating system | OSPF | IS-IS | BGP | SR-MPLS |
-|------------------------|:-:|:-:|:-:|:-:|
+| Operating system | OSPF | IS-IS | EIGRP | BGP | SR-MPLS |
+|------------------------|:-:|:-:|:-:|:-:|:-:|
 | Arista EOS             | ✅ | ✅ | ✅ | ✅ 
-| Arrcus ArcOS           | ✅ | ❌ | ❌ | ❌ |
-| Cisco IOS/IOS XE       | ✅ | ✅ | ✅ | ✅ |
-| Cisco Nexus OS         | ✅ | ✅ | ✅ | ❌ |
-| Cumulus Linux          | ✅ | ❌ | ✅ |  ❌ |
+| Arrcus ArcOS           | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Cisco IOS/IOS XE       | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Cisco Nexus OS         | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Cumulus Linux          | ✅ | ❌ | ❌ | ✅ |  ❌ |
 | FRR 7.5.0              | ✅ | ✅ | ✅ | ❌ |
-| Juniper vSRX 3.0       | ✅ | ✅ | ✅ | ❌ |
+| Juniper vSRX 3.0       | ✅ | ✅ | ❌ | ✅ | ❌ |
+
+Some OSPF parameters are not supported on all devices:
+
+| Operating system | reference<br />bandwidth |
+|------------------------|:-:|
+| Arista EOS             | ✅ |
+| Arrcus ArcOS           | ❌ |
+| Cisco IOS/IOS XE       | ✅ |
+| Cisco Nexus OS         | ✅ |
+| Cumulus Linux          | ✅ |
+| FRR 7.5.0              | ✅ |
+| Juniper vSRX 3.0       | ✅ |
+
+Some BGP parameters are not supported on all devices:
+
+| Operating system | originate<br />extra<br />prefixes |
+|------------------------|:-:|
+| Arista EOS             | ❌ |
+| Cisco IOS/IOS XE       | ✅ |
+| Cisco Nexus OS         | ❌ |
+| Cumulus Linux          | ❌ |
+| FRR 7.5.0              | ❌ |
+| Juniper vSRX 3.0       | ❌ |
