@@ -1,3 +1,13 @@
+# Development Notes
+
+This is development branch for what might become release 0.7 or release 0.6.4 (depending on how many changes we'll accumulate in this release).
+
+Changes from release 0.6.3:
+* Static typing in Python code and **mypy** tests
+* **bgp.advertise_loopback** parameter to disable loopback prefix advertisements
+* **bgp.originate** node parameter to originate additional prefixes
+* **ospf.reference_bandwidth** global/node parameter to set the OSPF reference bandwidth
+
 # Overview
 
 *netsim-tools* are bringing infrastructure-as-code concepts to networking labs. You'll describe your high-level network topology and routing design in a YAML file, and the tools in this repository will

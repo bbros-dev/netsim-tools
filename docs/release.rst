@@ -1,6 +1,12 @@
 Release notes
 =============
 
+2021-XX-XX (release 0.6.4 / 0.7)
+  * BGP parameters: advertise_loopback, originate
+  * OSPF reference bandwidth
+
+  :doc:`More details <release/0.6x>`
+
 2021-05-24 (`release 0.6.3 <https://github.com/ipspace/netsim-tools/releases/tag/release_0.6.3>`_)
   * BGP configuration module
   * IS-IS configuration module
@@ -54,6 +60,7 @@ Release notes
    :caption: Individual release notes
    :maxdepth: 2
 
+   release/0.6x.md
    release/0.6.md
    release/0.5.md
    release/0.4.md
