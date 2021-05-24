@@ -109,25 +109,14 @@ Individual **netsim-tools** [configuration modules](module-reference.md) are sup
 
 | Operating system | OSPF | IS-IS | EIGRP | BGP | SR-MPLS |
 |------------------------|:-:|:-:|:-:|:-:|:-:|
-| Arista EOS             | ✅ | ✅ | ✅ | ✅ 
+| Arista EOS             | ✅ | ✅ | ❌ | ✅ | ✅ 
 | Arrcus ArcOS           | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Cisco IOS/IOS XE       | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Cisco IOS              | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Cisco IOS XE           | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Cisco Nexus OS         | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Cumulus Linux          | ✅ | ❌ | ❌ | ✅ |  ❌ |
-| FRR 7.5.0              | ✅ | ✅ | ✅ | ❌ |
+| FRR 7.5.0              | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Juniper vSRX 3.0       | ✅ | ✅ | ❌ | ✅ | ❌ |
-
-Some OSPF parameters are not supported on all devices:
-
-| Operating system | reference<br />bandwidth |
-|------------------------|:-:|
-| Arista EOS             | ✅ |
-| Arrcus ArcOS           | ❌ |
-| Cisco IOS/IOS XE       | ✅ |
-| Cisco Nexus OS         | ✅ |
-| Cumulus Linux          | ✅ |
-| FRR 7.5.0              | ✅ |
-| Juniper vSRX 3.0       | ✅ |
 
 Some BGP parameters are not supported on all devices:
 
