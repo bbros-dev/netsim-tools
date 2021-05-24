@@ -4,7 +4,6 @@
 
 from box import Box
 
-# Related modules
 from .. import common
 from .. import addressing
 from .. import augment

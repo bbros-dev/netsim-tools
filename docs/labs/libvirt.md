@@ -26,7 +26,12 @@ The playbook:
 - Instantiates a new Python virtual environment in `/opt/netsim-tools` and install the Python dependencies into it.
 - Installs Ansible collections for supported network devices (IOS, NXOS, EOS, Junos)
 
-For more details, read the *[A Quick Introduction to Netsim-Tools](https://blog.kirchne.red/netsim-tools-quickstart.html)* by [Leo Kirchner](https://www.linkedin.com/in/leo-kirchner/).
+<div class='admonition tip'>
+<p class='title'>Tip on **sudo** passwords</p>
+The playbook uses **sudo** (or **become** as Ansible documentation likes to call it) to install system software. If **sudo** requires a password on your system, start **ansible-playbook** with `--ask-become-pass` option.
+</div>
+
+For more details, read *[A Quick Introduction to Netsim-Tools](https://blog.kirchne.red/netsim-tools-quickstart.html)* by [Leo Kirchner](https://www.linkedin.com/in/leo-kirchner/).
 
 ## Creating *vagrant-libvirt* Virtual Network
 
