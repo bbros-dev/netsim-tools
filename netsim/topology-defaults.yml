@@ -46,6 +46,7 @@ ospf:
 
 eigrp:
   supported_on: [ csr, iosv, nxos ]
+  as: 1
   attributes:
     global: [ as ]
     node: [ as ]
