@@ -1,6 +1,12 @@
 bgp:
   advertise_loopback: true
   as: 65000
+  community:
+    ebgp:
+    - standard
+    ibgp:
+    - standard
+    - extended
   ebgp_role: ''
   next_hop_self: true
   rr_list:
@@ -70,6 +76,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.3
@@ -124,6 +136,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.3
@@ -178,6 +196,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -236,6 +260,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1

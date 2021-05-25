@@ -9,6 +9,7 @@ Supported features:
 * IBGP sessions between loopback interfaces
 * BGP route reflectors
 * Next-hop-self control on IBGP sessions
+* BGP community propagation
 * Configurable link prefix advertisement
 * Additional (dummy) prefix advertisement
 * Interaction with OSPF or IS-IS (IGP is disabled on external links)
@@ -53,6 +54,7 @@ See [IBGP-over-OSPF Data Center Fabric example](bgp_example/ibgp.md) for details
 
 Advanced global configuration parameters include:
 
+* **community** -- configure BGP community propagation. By defaults, standard and extended communities are propagated to IBGP neighbors, and standard communities are propagated to EBGP neighbors. See *[BGP Community Propagation](#bgp-communities-propagation)* for more details.
 * **advertise_roles** -- list of link types and roles. Links matching any element of the list will be advertised into BGP. See *[Advertised BGP Prefixes](#advertised-bgp-prefixes)* for details.
 * **ebgp_role** -- link role set on links connecting nodes from different autonomous systems. See *[Interaction with IGP](#interaction-with-igp)* for details.
 * **advertise_loopback** -- when set to `True` (default), the loopback IP address is advertised as a BGP prefix. Set it to `False` in global defaults or as a node setting to disable loopback prefix advertisements.
@@ -70,7 +72,8 @@ Specifying a BGP autonomous system on individual nodes makes sense when each nod
 Additional per-node BGP configuration parameters include:
 
 * **bgp.advertise_loopback** -- when set to `False`, the loopback IP prefix is not advertised in BGP. See also [*Advanced Global Configuration Parameters*](#advanced-global-configuration-parameters).
-* **originate** -- a list of additional prefixes to advertise. The advertised prefixes are supported with a static route pointing to *Null0*.
+* **bgp.originate** -- a list of additional prefixes to advertise. The advertised prefixes are supported with a static route pointing to *Null0*.
+* **bgp.community** -- override global BGP community propagation defaults for this node. See *[BGP Community Propagation](#bgp-communities-propagation)* for more details.
 
 **Notes:**
 * **bgp.as** parameter *must* be specified for every node using BGP configuration module.
@@ -83,7 +86,7 @@ You can also use these link-level parameters to influence the BGP prefix adverti
 
 * **bgp.advertise** -- The link prefix will be configured with the **network** statement within the BGP process.
 
-See [examples](#examples) for sample usage guidelines.
+See [examples](#more-examples) for sample usage guidelines.
 
 ## Advertised BGP Prefixes
 
@@ -171,7 +174,49 @@ BGP transformation module can set link *role* on links used for EBGP sessions. T
 
 **Consequence:** default settings exclude links with EBGP sessions from IGP processes. See the [Simple BGP Example](bgp_example/simple.md) for details.
 
-## Examples
+## BGP Communities Propagation
+
+The propagation of BGP communities over IBGP and EBGP sessions is controlled with global- or node-level **bgp.community** attribute.
+
+The value of **bgp.community** attribute could be:
+
+* A string: **standard** or **extended** -- only specified communities will be propagated to IBGP and EBGP neighbors. In the following example, R1 propagates standard communities to all its neighbors.
+
+```
+nodes:
+  r1:
+    bgp:
+      community: standard
+```
+
+* A list of strings (**standard** and/or **extended**) -- all communities specified in the list will be propagated to IBGP and EBGP neighbors. Most network operating systems will be configured with **both** configuration keyword if you specify `['standard','extended']` as the value. In the following example, R1 propagates standard and extended communities to all its neighbors.
+
+```
+nodes:
+  r1:
+    bgp:
+      community: [standard, extended]
+```
+
+* A dictionary with two keys: **ibgp** and **ebgp**. The value of each key could be a string or a list (see above). The following example sets a network-wide default -- send standard and extended communities to IBGP neighbors, and standard communities to EBGP neighbors (this is the global default set in global **topology-defaults.yml** file).
+
+```
+bgp:
+  community: 
+    ibgp: [standard, extended]
+    ebgp: [standard]
+```
+
+* To override global defaults and stop community propagation, use an empty list as the **bgp.community** value. In the following example, R1 will not send any BGP communities to its BGP peers.
+
+```
+nodes:
+  r1:
+    bgp:
+      community: []
+```
+
+## More Examples
 
 ```eval_rst
 .. toctree::

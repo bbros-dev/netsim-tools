@@ -23,11 +23,14 @@ bgp:
   ebgp_role: external
   advertise_roles: [ stub ]
   advertise_loopback: True
+  community:
+    ibgp: [ standard, extended ]
+    ebgp: [ standard ]
   no_propagate: [ ebgp_role, advertise_roles, rr_list, as_list ]
   next_hop_self: true
   attributes:
-    global: [ as, next_hop_self, rr_list, ebgp_role, as_list, advertise_loopback ]
-    node: [ as, next_hop_self, rr, originate, advertise_loopback ]
+    global: [ as, next_hop_self, rr_list, ebgp_role, as_list, advertise_loopback, community ]
+    node: [ as, next_hop_self, rr, originate, advertise_loopback, community ]
     link: [ advertise ]
 
 isis:

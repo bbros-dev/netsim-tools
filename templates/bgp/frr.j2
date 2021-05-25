@@ -1,3 +1,7 @@
+{% macro community(list) -%}
+{{ "both" if list|length >= 2 else list[0] }}
+{%- endmacro %}
+!
 router bgp {{ bgp.as }}
   no bgp ebgp-requires-policy
   bgp default show-hostname
@@ -24,11 +28,18 @@ router bgp {{ bgp.as }}
 {% for n in bgp.neighbors if n.ipv4 is defined %}
   neighbor {{ n.ipv4 }} activate
 {%   if n.type == 'ibgp' %}
-{%   if bgp.next_hop_self is defined and bgp.next_hop_self %}
+{%     if bgp.next_hop_self is defined and bgp.next_hop_self %}
   neighbor {{ n.ipv4 }} next-hop-self
 {%     endif %}
 {%     if bgp.rr|default('') and not n.rr|default('') %}
   neighbor {{ n.ipv4 }} route-reflector-client
+{%     endif %}
+{%     if bgp.community.ibgp|default([]) %}
+  neighbor {{ n.ipv4 }} send-community {{ community(bgp.community.ibgp) }}
+{%     endif %}
+{%   else %}
+{%     if bgp.community.ebgp|default([]) %}
+  neighbor {{ n.ipv4 }} send-community {{ community(bgp.community.ebgp) }}
 {%     endif %}
 {%   endif %}
 {% endfor %}

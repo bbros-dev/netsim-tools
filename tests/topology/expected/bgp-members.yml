@@ -13,6 +13,12 @@ bgp:
     65001:
       members:
       - e1
+  community:
+    ebgp:
+    - standard
+    ibgp:
+    - standard
+    - extended
   next_hop_self: true
 input:
 - topology/input/bgp-members.yml
@@ -129,6 +135,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.2
@@ -185,6 +197,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -241,6 +259,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -253,6 +277,7 @@ nodes:
       rr: true
       type: ibgp
     - as: 65001
+      ifindex: 3
       ipv4: 10.1.0.17
       name: e1
       type: ebgp
@@ -310,6 +335,12 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65000
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -322,6 +353,7 @@ nodes:
       rr: true
       type: ibgp
     - as: 65002
+      ifindex: 3
       ipv4: 10.1.0.21
       name: e2
       type: ebgp
@@ -379,8 +411,15 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65001
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
+      ifindex: 1
       ipv4: 10.1.0.18
       name: pe1
       type: ebgp
@@ -414,8 +453,15 @@ nodes:
 - bgp:
     advertise_loopback: true
     as: 65002
+    community:
+      ebgp:
+      - standard
+      ibgp:
+      - standard
+      - extended
     neighbors:
     - as: 65000
+      ifindex: 1
       ipv4: 10.1.0.22
       name: pe2
       type: ebgp

@@ -1,3 +1,7 @@
+{% macro community(list) -%}
+{{ "both" if list|length >= 2 else list[0] }}
+{%- endmacro %}
+!
 feature bgp
 !
 router bgp {{ bgp.as }}
@@ -23,6 +27,13 @@ router bgp {{ bgp.as }}
 {%     endif %}
 {%     if bgp.rr|default('') and not n.rr|default('') %}
    route-reflector-client
+{%     endif %}
+{%     if bgp.community.ibgp|default([]) %}
+   send-community {{ community(bgp.community.ibgp) }}
+{%     endif %}
+{%   else %}
+{%     if bgp.community.ebgp|default([]) %}
+   send-community {{ community(bgp.community.ebgp) }}
 {%     endif %}
 {%   endif %}
 !

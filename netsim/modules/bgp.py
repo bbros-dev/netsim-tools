@@ -10,9 +10,29 @@ from . import _Module
 from .. import common
 
 def check_bgp_parameters(node: Box) -> None:
-  if "bgp" in node:
-    if not "as" in node.bgp:
-      common.error("Node %s has BGP enabled but no AS number specified" % node.name)
+  if not "bgp" in node:
+    return
+  if not "as" in node.bgp:
+    common.error("Node %s has BGP enabled but no AS number specified" % node.name)
+
+  if "community" in node.bgp:
+    bgp_comm = node.bgp.community
+    if isinstance(bgp_comm,str):
+      node.bgp.community = { 'ibgp' : [ bgp_comm ], 'ebgp': [ bgp_comm ]}
+    elif isinstance(bgp_comm,list):
+      node.bgp.community = { 'ibgp' : bgp_comm, 'ebgp': bgp_comm }
+    elif not(isinstance(bgp_comm,dict)):
+      common.error("bgp.community attribute in node %s should be a string, a list, or a dictionary (%s)" % (node.name,str(bgp_comm)))
+      return
+
+    for k in node.bgp.community.keys():
+      if not k in ['ibgp','ebgp']:
+        common.error("Invalid BGP community setting in node %s: %s" % (node.name,k))
+      if isinstance(node.bgp.community[k],str):
+        node.bgp.community[k] = [ node.bgp.community[k] ]
+      for v in node.bgp.community[k]:
+        if not v in ['standard','extended']:
+          common.error("Invalid BGP community propagation setting for %s sessions in node %s: %s" % (k,node.name,v))
 
 def find_bgp_rr(bgp_as: int, topology: Box) -> typing.List[Box]:
   rrlist = []
@@ -171,9 +191,9 @@ class BGP(_Module):
           continue
         if neighbor.bgp.get("as") and neighbor.bgp.get("as") != node.bgp.get("as"):
           extra_data = Box({})
+          extra_data.ifindex = l.ifindex
           if "unnumbered" in l:
             extra_data.unnumbered = True
-            extra_data.ifindex = l.ifindex
           node.bgp.neighbors.append(bgp_neighbor(neighbor,ngb_ifdata,'ebgp',extra_data))
 
     # Set bgp.advertise flag on stub links
