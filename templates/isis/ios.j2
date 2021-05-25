@@ -15,9 +15,6 @@ router isis Gandalf
 {% for l in links|default([]) if l.type|default("") == "stub" or l.role|default("NONE") in ["stub","passive"] %}
   passive-interface {{ l.ifname }}
 {% endfor %}
-{% if isis.ipv4 is defined %}
-  address-family ipv4 unicast
-{% endif %}
 {% if isis.ipv6 is defined %}
   address-family ipv6 unicast
     multi-topology
