@@ -59,27 +59,31 @@ protocols {
 }
 protocols {
   bgp {
-    group ibgp-peers {
+{% for af in ['ipv4','ipv6'] if bgp[af] is defined %}
+    group ibgp-peers-{{ af }} {
       type internal;
       export ibgp-export;
-      local-address {{ loopback.ipv4|ipaddr('address') }}
-{% if bgp.rr is defined %}
-      cluster {{ loopback.ipv4|ipaddr('address') }}
-{% endif %}
-{% for n in bgp.neighbors if n.ipv4 is defined and n.type == 'ibgp' %}
-      neighbor {{ n.ipv4 }} {
+      local-address {{ loopback[af]|ipaddr('address') }};
+{%   if bgp.rr is defined %}
+      cluster {{ loopback.ipv4|ipaddr('address') }};
+{%   endif %}
+{%   for n in bgp.neighbors if n[af] is defined and n.type == 'ibgp' %}
+      neighbor {{ n[af] }} {
         description {{ n.name }};
       }
-{% endfor %}
+{%   endfor %}
     }
+{% endfor %}
     group ebgp-peers {
       export ebgp-export;
       advertise-inactive;
-{% for n in bgp.neighbors if n.ipv4 is defined and n.type == 'ebgp' %}
-      neighbor {{ n.ipv4 }} {
+{% for n in bgp.neighbors if n.type == 'ebgp' %}
+{%   for af in ['ipv4','ipv6'] if n[af] is defined %}
+      neighbor {{ n[af] }} {
         peer-as {{ n.as }};
         description {{ n.name }};
       }
+{%   endfor %}
 {% endfor %}
     }
   }
