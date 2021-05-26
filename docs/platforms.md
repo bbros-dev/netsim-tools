@@ -118,12 +118,14 @@ Individual **netsim-tools** [configuration modules](module-reference.md) are sup
 | FRR 7.5.0              | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Juniper vSRX 3.0       | ✅ | ✅ | ❌ | ✅ | ❌ |
 
+## BGP Support
+
 Some BGP parameters are not supported on all devices:
 
-| Operating system | originate<br />extra<br />prefixes |
+| Operating system | IPv6 address<br />family |
 |------------------------|:-:|
 | Arista EOS             | ❌ |
-| Cisco IOS/IOS XE       | ✅ |
+| Cisco IOS/IOS XE       | ❌ |
 | Cisco Nexus OS         | ❌ |
 | Cumulus Linux          | ❌ |
 | FRR 7.5.0              | ❌ |

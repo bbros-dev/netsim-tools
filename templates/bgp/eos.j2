@@ -1,5 +1,6 @@
 router bgp {{ bgp.as }}
   bgp advertise-inactive
+  bgp log-neighbor-changes
 {% for n in bgp.neighbors if n.ipv4 is defined %}
   neighbor {{ n.ipv4 }} remote-as {{ n.as }}
   neighbor {{ n.ipv4 }} description {{ n.name }}
@@ -31,6 +32,14 @@ router bgp {{ bgp.as }}
   network {{ l.ipv4|ipaddr('0') }}
 {% endfor %}
 !
+{% for pfx in bgp.originate|default([]) %}
+  network {{ pfx|ipaddr('0') }}
+{% endfor %}
+!
 {% for n in bgp.neighbors if n.ipv4 is defined %}
   neighbor {{ n.ipv4 }} activate
+{% endfor %}
+!
+{% for pfx in bgp.originate|default([]) %}
+ip route {{ pfx|ipaddr('0') }} Null0
 {% endfor %}
