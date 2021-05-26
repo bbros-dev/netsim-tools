@@ -115,8 +115,23 @@ Individual **netsim-tools** [configuration modules](module-reference.md) are sup
 | Cisco IOS XE           | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Cisco Nexus OS         | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Cumulus Linux          | ✅ | ❌ | ❌ | ✅ |  ❌ |
-| FRR 7.5.0              | ✅ | ✅ | ✅ | ✅ | ❌ |
+| FRR 7.5.0              | ✅ | ✅ | ❌ | ✅ | ❌ |
 | Juniper vSRX 3.0       | ✅ | ✅ | ❌ | ✅ | ❌ |
+
+## IPv6 Support
+
+Core functionality of *netsim-tools* fully supports IPv6. Individual configuration modules might not support IPv6 address family. OSPFv3 is not implemented yet.
+
+| Operating system | IPv6<br />addresses | OSPFv3 | IS-IS MT | EIGRP<br />IPv6 AF | BGP<br />IPv6 AF | SR-MPLS |
+|------------------------|:-:|:-:|:-:|:-:|:-:|:-:|
+| Arista EOS             | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Arrcus ArcOS           | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Cisco IOS              | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Cisco IOS XE           | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Cisco Nexus OS         | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Cumulus Linux          | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| FRR 7.5.0              | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| Juniper vSRX 3.0       | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ |
 
 ## BGP Support
 
