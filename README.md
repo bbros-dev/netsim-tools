@@ -1,3 +1,4 @@
+<!--
 # Development Notes
 
 This is development branch for what might become release 0.7 or release 0.6.4 (depending on how many changes we'll accumulate in this release).
@@ -8,6 +9,7 @@ Changes from release 0.6.3 ([more details](https://netsim-tools.readthedocs.io/e
 * **bgp.advertise_loopback** parameter to disable loopback prefix advertisements
 * **bgp.originate** node parameter to originate additional prefixes
 * **ospf.reference_bandwidth** global/node parameter to set the OSPF reference bandwidth
+-->
 
 # Overview
 
@@ -23,12 +25,12 @@ Instead of wasting time creating lab topology in a GUI and configuring boring de
 
 ## Releases
 
-* Latest release: [release_0.6.3](https://github.com/ipspace/netsim-tools/releases/tag/release_0.6.3) (read [release notes](https://netsim-tools.readthedocs.io/en/latest/release/0.6.html))
-* If you find bugs in the latest 0.6 release, please report them and use and earlier 0.6 release or [release_0.5](https://github.com/ipspace/netsim-tools/releases/tag/release_0.5).
+* Latest release: [release_0.7 candidate](https://github.com/ipspace/netsim-tools/tree/dev_0.7) (read [release notes](https://netsim-tools.readthedocs.io/en/dev_0.7/release/0.7.html))
+* If you find bugs in the 0.7 release, please report them and use the [latest 0.6 release](https://github.com/ipspace/netsim-tools/releases/tag/release_0.6.3).
 
 More details in [release notes](https://netsim-tools.readthedocs.io/en/latest/release.html).
 
-You might also want to [read the documentation](https://netsim-tools.readthedocs.io/en/latest/), and [installation guidelines](https://netsim-tools.readthedocs.io/en/latest/install.html).
+You might also want to [read the documentation](https://netsim-tools.readthedocs.io/en/dev_0.7/), and [installation guidelines](https://netsim-tools.readthedocs.io/en/dev_0.7/install.html).
 
 ## An overview of tools:
 

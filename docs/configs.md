@@ -31,3 +31,9 @@ Default passwords and other default configuration parameters are supposed to be 
 ## Module configurations
 
 Module-specific device configurations are created from templates in **templates/_module_** directory. Device-specific configuration template is selected using **ansible_network_os** value. See the [module descriptions](module-reference.md) for list of supported parameters.
+
+This part of the configuration deployment could be limited with **modlist** external variable -- a subset of configuration modules to be deployed. For example, to configure just OSPF (in a network running OSPF and BGP) on R1, use:
+
+```
+$ initial-config.ansible -l r1 -e modlist=[ospf]
+```
