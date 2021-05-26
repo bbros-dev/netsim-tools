@@ -196,6 +196,14 @@ class BGP(_Module):
             extra_data.unnumbered = True
           node.bgp.neighbors.append(bgp_neighbor(neighbor,ngb_ifdata,'ebgp',extra_data))
 
+    # Calculate BGP address families
+    #
+    for af in ['ipv4','ipv6']:
+      for n in node.bgp.neighbors:
+        if af in n:
+          node.bgp[af] = True
+          break
+
     # Set bgp.advertise flag on stub links
     #
     stub_roles = topology.bgp.get("advertise_roles",None) or topology.defaults.bgp.get("advertise_roles",None)

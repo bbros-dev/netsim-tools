@@ -141,6 +141,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ipv4: 10.0.0.2
@@ -203,6 +204,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -265,6 +267,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -341,6 +344,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ipv4: 10.0.0.1
@@ -417,6 +421,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ifindex: 1
@@ -459,6 +464,7 @@ nodes:
       ibgp:
       - standard
       - extended
+    ipv4: true
     neighbors:
     - as: 65000
       ifindex: 1
