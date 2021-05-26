@@ -14,6 +14,11 @@ router bgp {{ bgp.as }}
 {% for l in links|default([]) if l.bgp.advertise|default("") and l.ipv4 is defined %}
   network {{ l.ipv4|ipaddr(0) }}
 {% endfor %}
+!
+{% for pfx in bgp.originate|default([]) %}
+  network {{ pfx|ipaddr('0') }}
+{% endfor %}
+!
 {% for n in bgp.neighbors if n.ipv4 is defined %}
  neighbor {{ n.ipv4 }} remote-as {{ n.as }}
   description {{ n.name }}
@@ -37,4 +42,8 @@ router bgp {{ bgp.as }}
 {%     endif %}
 {%   endif %}
 !
+{% endfor %}
+!
+{% for pfx in bgp.originate|default([]) %}
+ip route {{ pfx|ipaddr('0') }} Null0
 {% endfor %}

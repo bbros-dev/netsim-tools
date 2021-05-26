@@ -25,6 +25,10 @@ router bgp {{ bgp.as }}
   network {{ l.ipv4 }}
 {% endfor %}
 !
+{% for pfx in bgp.originate|default([]) %}
+  network {{ pfx|ipaddr('0') }}
+{% endfor %}
+!
 {% for n in bgp.neighbors if n.ipv4 is defined %}
   neighbor {{ n.ipv4 }} activate
 {%   if n.type == 'ibgp' %}
@@ -42,4 +46,8 @@ router bgp {{ bgp.as }}
   neighbor {{ n.ipv4 }} send-community {{ community(bgp.community.ebgp) }}
 {%     endif %}
 {%   endif %}
+{% endfor %}
+!
+{% for pfx in bgp.originate|default([]) %}
+ip route {{ pfx|ipaddr('0') }} Null0
 {% endfor %}

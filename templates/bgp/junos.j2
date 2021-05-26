@@ -1,5 +1,12 @@
 routing-options {
   autonomous-system {{ bgp.as }};
+{% if bgp.originate is defined %}
+  static {
+{% for pfx in bgp.originate|default([]) %}
+    route {{ pfx|ipaddr('0') }} discard;
+{% endfor %}
+  }
+{% endif %}
 }
 policy-options {
   delete: policy-statement ibgp-export;
@@ -14,6 +21,12 @@ policy-options {
       }
       then accept;
     }
+{% if bgp.originate is defined %}
+    term originate {
+      from protocol static;
+      then accept;
+    }
+{% endif %}
 {% if bgp.next_hop_self is defined and bgp.next_hop_self %}
     term next-hop-self {
       from {
@@ -33,6 +46,12 @@ policy-options {
       }
       then accept;
     }
+{% if bgp.originate is defined %}
+    term originate {
+      from protocol static;
+      then accept;
+    }
+{% endif %}
   }
 }
 protocols {
