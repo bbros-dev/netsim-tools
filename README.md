@@ -18,8 +18,8 @@ Changes from release 0.6.3 ([more details](https://netsim-tools.readthedocs.io/e
 * Create *Vagrantfile* configuration file for *virtualbox* or *libvirt* environment
 * Create *containerlab* configuration file
 * Create Ansible inventory and configuration file
-* Create IPv4 and IPv6 addressing plan and OSPF, IS-IS and BGP routing design
-* Configure IPv4, IPv6, LLDP, OSPF, IS-IS, BGP or SR-MPLS on your lab devices.
+* Create IPv4 and IPv6 addressing plan and OSPF, EIGRP, IS-IS, and BGP routing design
+* Configure IPv4, IPv6, LLDP, OSPF, EIGRP, IS-IS, BGP, or SR-MPLS on your lab devices.
 
 Instead of wasting time creating lab topology in a GUI and configuring boring details, you'll start with a lab preconfigured according to your specifications.
 
