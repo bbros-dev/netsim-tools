@@ -30,5 +30,5 @@ teardown() {
 
 @test "Connect passes user command and arguments" {
   run sudo ./connect.sh e2 ip a
-  assert_output --partial 'inet 172.20.20.7/24 brd 172.20.20.255 scope global eth0'
+  assert_output --regexp 'inet 172\.20\.20(.*) brd 172\.20\.20\.255 scope global eth0'
 }
